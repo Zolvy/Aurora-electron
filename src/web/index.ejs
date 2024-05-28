@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta name=viewport content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+        <link rel=modulepreload href=https://music.apple.com/includes/js-cdn/hls.js/2.610.3/hls.js/hls.js crossorigin="">
+        <link rel=preconnect href=https://amp-api.music.apple.com crossorigin="">
+        <link rel=preconnect href=https://is1-ssl.mzstatic.com crossorigin="">
+        <link rel=preconnect href=https://is2-ssl.mzstatic.com crossorigin="">
+        <link rel=preconnect href=https://is3-ssl.mzstatic.com crossorigin="">
+        <link rel=preconnect href=https://is4-ssl.mzstatic.com crossorigin="">
+        <link rel=preconnect href=https://is5-ssl.mzstatic.com crossorigin="">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title><%= title %></title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <%- include('./imports/base/setup.ejs') %>
+     <script src="./scripts/apple.js"></script>
+     <script defer src=https://music.apple.com/includes/js-cdn/hls.js/2.610.3/hls.js/hls.js></script>
+    <script src="https://js-cdn.music.apple.com/musickit/v3/amp/musickit.js" data-web-components async></script>
+</body>
+</html>
