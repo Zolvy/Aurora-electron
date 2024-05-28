@@ -1,5 +1,5 @@
 {
-  "name": "aura",
+  "name": "aurora",
   "version": "1.0.0",
   "repository": "https://github.com/Zolvy/AME-1.2.git",
   "author": "loonalol <loona@loona.lol>",
@@ -9,6 +9,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "lint": "eslint -c .eslintrc.js ",
+    "format": "prettier . --write",
     "start": "yarn build && electron ./dist/render.js"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "eslint": "9.x",
     "express": "^4.19.2",
     "globals": "^15.3.0",
+    "prettier": "3.2.5",
     "typescript-eslint": "^7.11.0"
   }
 }

@@ -1,4 +1,5 @@
 # Aurora
+
 <div align="center">
    <img alt="Forks" src="https://img.shields.io/github/commit-activity/w/Zolvy/Aurora?style=for-the-badge"></a>
    <img alt="Size" src="https://img.shields.io/github/repo-size/Zolvy/Aurora?style=for-the-badge"></a>
@@ -10,3 +11,4 @@ Hopefully a Replacement for [Apple Music Electron](https://github.com/Zolvy/Appl
 
 ```bash
 yarn && yarn start
+```
