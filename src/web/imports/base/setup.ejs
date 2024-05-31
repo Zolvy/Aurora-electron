@@ -7,14 +7,13 @@
 <body>
 <%- include('../chrome/chrome-drag.ejs') %>
 <div class="setup-obn-page">
-    <img src="" alt="Aurora">
     <h1>Welcome to Aurora</h1>
-    <button onclick="handleMusicKitLogin()" class="login-btn">Sign In with Apple </button>
+    <select>
+        <option value="Acrylic">Acrylic</option>
+        <option value="Mica">Mica</option>
+        <option value="None">None</option>
+    </select>
+    <button onclick="handleLogin()" class="login-btn">Complete Setup</button>
 </div>
-    <script>
-        function handleMusicKitLogin() {
-           MusicKit.getInstance().authorize()
-        }
-    </script>
 </body>
 </html>
