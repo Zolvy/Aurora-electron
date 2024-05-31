@@ -1,13 +1,25 @@
-import { app, BrowserWindow, session } from "electron";
+import { app, BrowserWindow } from "electron";
+import { PARAMS, VALUE, MicaBrowserWindow, IS_WINDOWS_11, WIN10 } from 'mica-electron';
 import * as path from "path";
-import express, { Request, Response } from "express";
+import express, { Request, Response, NextFunction } from "express";
+import expressLayouts from "express-ejs-layouts";
+
 let appPort = 3000;
-let mainWindow: BrowserWindow | null;
+let mainWindow: MicaBrowserWindow | null;
+
+let pages = {
+  "/": (req: Request, res: Response) => {
+    res.render("../web/index.ejs", { title: "Aura" });
+  },
+  "/home": (req: Request, res: Response) => {
+    res.render("../web/views/home", { title: "Aura" });
+  },
+};
 
 function createWindow() {
-  mainWindow = new BrowserWindow({
-    width: 1244,
-    height: 700,
+  mainWindow = new MicaBrowserWindow({
+    width: 1740,
+    height: 900,
     frame: true,
     x: undefined,
     y: undefined,
@@ -18,7 +30,7 @@ function createWindow() {
     titleBarStyle: "hidden",
     trafficLightPosition: { x: 20, y: 13 },
     titleBarOverlay: {
-      color: "#1d1c1c",
+      color: "rgba(29, 28, 0, 0)", // Slightly transparent to blend better
       symbolColor: "#ffffff",
       height: 50,
     },
@@ -33,23 +45,37 @@ function createWindow() {
     },
   });
 
+  // Apply Mica effect for Windows 11
+  if (IS_WINDOWS_11) {
+  //  mainWindow.setMicaEffect();
+    // Alternatively, you can use:
+    // mainWindow.setMicaTabbedEffect();
+     mainWindow.setMicaAcrylicEffect();
+  }
+
   /***** WEBSERVER *****/
-  let expressApp = express();
-  // Serve static files from the 'renderer' directory
+  const expressApp = express();
   expressApp.use(express.static(path.join(__dirname, "../src/web")));
 
   expressApp.set("views", path.join(__dirname, "../src/web"));
   expressApp.set("view engine", "ejs");
-
-  expressApp.get("/", (req: Request, res: Response) => {
-    res.render("index", { title: "Aura" });
-  });
+  expressApp.use(expressLayouts);
+  expressApp.set("layout", "layout/chrome-drag");  
+  expressApp.use((req, res, next) => {
+    if (req.path !== '/') {
+        res.locals.layout = 'layout/chrome-player-layout';
+    }
+    next();
+});
+  for (const [path, handler] of Object.entries(pages)) {
+    expressApp.get(path, handler);
+  }
 
   expressApp.listen(appPort, () => {
     console.log(`Express server running at http://localhost:${appPort}`);
   });
 
-  expressApp.use((err: Error, req: Request, res: Response, next: Function) => {
+  expressApp.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
     res.status(500).send("Something went wrong!");
   });
@@ -59,32 +85,6 @@ function createWindow() {
 
 app.whenReady().then(() => {
   createWindow();
-  /***** Haxer!!!! ****/
-  session.defaultSession.webRequest.onBeforeSendHeaders(
-    async (details, callback) => {
-      if (details.url === "https://buy.itunes.apple.com/account/web/info") {
-        details.requestHeaders["sec-fetch-site"] = "same-site";
-        details.requestHeaders["DNT"] = "1";
-        const itspod = await mainWindow?.webContents.executeJavaScript(
-          'window.localStorage.getItem("itspod")',
-        );
-        if (itspod !== null) {
-          details.requestHeaders["Cookie"] = `itspod=${itspod}`;
-        }
-      }
-      if (details.url.includes("apple.com")) {
-        details.requestHeaders["DNT"] = "1";
-        details.requestHeaders["authority"] = "amp-api.music.apple.com";
-        details.requestHeaders["origin"] = "https://beta.music.apple.com";
-        details.requestHeaders["referer"] = "https://beta.music.apple.com";
-        details.requestHeaders["sec-fetch-dest"] = "empty";
-        details.requestHeaders["sec-fetch-mode"] = "cors";
-        details.requestHeaders["sec-fetch-site"] = "same-site";
-      }
-      callback({ requestHeaders: details.requestHeaders });
-    },
-  );
-  /********************/
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });

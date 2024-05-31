@@ -1,19 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
 <body>
-<%- include('../chrome/chrome-drag.ejs') %>
-<div class="setup-obn-page">
-    <h1>Welcome to Aurora</h1>
-    <select>
-        <option value="Acrylic">Acrylic</option>
-        <option value="Mica">Mica</option>
-        <option value="None">None</option>
-    </select>
-    <button onclick="handleLogin()" class="login-btn">Complete Setup</button>
-</div>
+    <div class="setup-obn-page">
+        <h1>Welcome to Aurora</h1>
+        <div class="setup-container">
+            <label for="theme-select">Choose your theme</label>
+            <select id="theme-select" class="setup-settings">
+                <option value="Acrylic">Acrylic</option>
+                <option value="Mica">Mica</option>
+            </select>
+            <button onclick="handleLogin()" class="login-btn">Complete Setup</button>
+        </div>
+    </div>
+    <script>
+        function handleLogin() {
+            // Redirect to a new page
+            window.location.href = '/home';
+        }
+    </script>
 </body>
-</html>
