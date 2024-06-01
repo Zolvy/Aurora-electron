@@ -5,6 +5,7 @@
   "author": "loonalol <loona@loona.lol>",
   "license": "MIT",
   "private": "true",
+  
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -13,7 +14,7 @@
     "start": "yarn build && electron ./dist/render.js"
   },
   "dependencies": {
-    "@types/ejs": "^3.1.5",
+    "discord-auto-rpc": "^1.0.17",
     "ejs": "^3.1.10",
     "express-ejs-layouts": "^2.5.1",
     "less": "^4.2.0",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
+    "@types/ejs": "^3.1.5",
     "@types/express": "^4.17.21",
     "@types/express-ejs-layouts": "^2.5.4",
     "electron": "^31.0.0-beta.6",

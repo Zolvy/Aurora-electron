@@ -1,14 +1,21 @@
-
 <body>
-    <div class="sidebar-content">
-            <button class="sidebar-btn">
-                Home
-            </button>
-            <button class="sidebar-btn">
-               Albums 
-            </button>
-            <button class="sidebar-btn">
-                Songs
-            </button>
-    </div>
+  <div class="sidebar-content">
+    <button onclick="goToPage('/home')" class="sidebar-btn">
+      <i class="icon" data-lucide="home"></i>
+      Home
+    </button>
+    <button onclick="goToPage('/settings')" class="sidebar-btn">
+      <i class="icon" data-lucide="cog"></i>
+      Settings
+    </button>
+  </div>
+
+  <script src="../scripts/icons.js"></script>
+  <script>
+    lucide.createIcons();
+    
+    function goToPage(page) {
+      window.location.href = page;
+    }
+  </script>
 </body>

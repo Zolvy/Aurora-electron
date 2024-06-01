@@ -1,23 +1,28 @@
 html, body {
-  background-color: rgba(14, 13, 13, 0.322);
+  background-color: rgba(14, 13, 13, 0.281);
   padding: 0;
   margin: 0;
   color: white;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow: hidden;
   width: 100%;
+    font-synthesis: none;
+  text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+    line-height: 1.5;
+  font-weight: 400;
   height: 100%;
+  user-select: none;
+}
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
 }
 
 .amp-body {
@@ -25,6 +30,9 @@ html, body {
     height: 100%;
     padding-left: 3vh;
     padding-top: 3vh;
+    animation: fadeInAnimation ease 0.5s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .setup-obn-page {
@@ -33,9 +41,6 @@ html, body {
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  min-height: 100vh;
-  user-select: none;
-  gap: 8px;
 }
 
 .login-btn {
@@ -56,7 +61,6 @@ html, body {
 }
 
 .setup-page h1 {
-    margin-bottom: 20px;
     font-size: 2em;
     color: #333;
 }
@@ -65,6 +69,8 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 5vh;
+    gap: 1vh;
 }
 
 .setup-settings {
@@ -80,6 +86,8 @@ html, body {
   height: 100%;
   width: 30vh;
   margin: 0;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
 
 .sidebar-content{
@@ -88,19 +96,35 @@ html, body {
   width: 100%;
   height: 100%;
   margin-top: 5vh;
-  gap: 2vh
+  gap: 0vh;
+
 }
 
 .sidebar-btn{
   background-color: inherit;
   width: 100%;
-  color: white;
+color: white;
+font-style: bold;
   cursor: pointer;
   height: 5vh;
   border: none;
   text-align: left;
   padding: 0vh 3vh 0vh;
-  font-size: larger;
+  font-size: 2vh;
+}
+.sidebar-btn:hover{
+  background-color: rgba(14, 13, 13, 0.397);
+}
+
+.username-input{
+  background-color: transparent;
+  border: white solid;
+  color: white;
+}
+
+.icon{
+width: 1.6vh;
+height: 1.6vh;
 }
 
 .wrapper{

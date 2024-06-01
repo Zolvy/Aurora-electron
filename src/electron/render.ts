@@ -1,23 +1,15 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
+import './rpc'
 import { PARAMS, VALUE, MicaBrowserWindow, IS_WINDOWS_11, WIN10 } from 'mica-electron';
 import * as path from "path";
 import express, { Request, Response, NextFunction } from "express";
 import expressLayouts from "express-ejs-layouts";
+import { appPort, pages, applyMicaEffect } from "./settings";
+import { Build } from './index.json'
 
-let appPort = 3000;
-let mainWindow: MicaBrowserWindow | null;
-
-let pages = {
-  "/": (req: Request, res: Response) => {
-    res.render("../web/index.ejs", { title: "Aura" });
-  },
-  "/home": (req: Request, res: Response) => {
-    res.render("../web/views/home", { title: "Aura" });
-  },
-};
-
+let mainWindow: BrowserWindow | null;
 function createWindow() {
-  mainWindow = new MicaBrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1740,
     height: 900,
     frame: true,
@@ -30,7 +22,7 @@ function createWindow() {
     titleBarStyle: "hidden",
     trafficLightPosition: { x: 20, y: 13 },
     titleBarOverlay: {
-      color: "rgba(29, 28, 0, 0)", // Slightly transparent to blend better
+      color: "rgba(29, 28, 0, 0)", 
       symbolColor: "#ffffff",
       height: 50,
     },
@@ -45,13 +37,8 @@ function createWindow() {
     },
   });
 
-  // Apply Mica effect for Windows 11
-  if (IS_WINDOWS_11) {
-  //  mainWindow.setMicaEffect();
-    // Alternatively, you can use:
-    // mainWindow.setMicaTabbedEffect();
-     mainWindow.setMicaAcrylicEffect();
-  }
+  /** Unused for now, Breaks window controls **/
+//applyMicaEffect(mainWindow)
 
   /***** WEBSERVER *****/
   const expressApp = express();
@@ -60,13 +47,13 @@ function createWindow() {
   expressApp.set("views", path.join(__dirname, "../src/web"));
   expressApp.set("view engine", "ejs");
   expressApp.use(expressLayouts);
-  expressApp.set("layout", "layout/chrome-drag");  
+  expressApp.set("layout", "layout/chrome-drag");
   expressApp.use((req, res, next) => {
     if (req.path !== '/') {
-        res.locals.layout = 'layout/chrome-player-layout';
+      res.locals.layout = 'layout/chrome-player-layout';
     }
     next();
-});
+  });
   for (const [path, handler] of Object.entries(pages)) {
     expressApp.get(path, handler);
   }
@@ -79,11 +66,12 @@ function createWindow() {
     console.error(err.stack);
     res.status(500).send("Something went wrong!");
   });
-  /***************/
   mainWindow.loadURL(`http://localhost:${appPort}`);
+  /***************/
 }
 
 app.whenReady().then(() => {
+console.log("Electron App Created, ID:", Build )
   createWindow();
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();

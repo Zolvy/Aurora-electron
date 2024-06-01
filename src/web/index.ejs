@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <meta name=viewport content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+    <meta name=viewport content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-     <script src="./scripts/vue.js"></script>
-     <script src="./scripts/scroll.js"></script>
+    <script src="./scripts/vue.js"></script>
+    <script src="./scripts/scroll.js"></script>
     <title><%= title %></title>
-<link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div id="app">
-        <%- include('./imports/base/setup.ejs') %>
+    <div class="setup-obn-page">
+        <h1>Welcome to Aurora</h1>
+        <div class="setup-container">
+            <input type="text" class="username-input" >
+            <button onclick="handleLogin()" class="login-btn">Complete Setup</button>
+        </div>
     </div>
+    <script src="./index.js"></script>
 </body>
 </html>
