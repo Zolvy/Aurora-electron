@@ -1,5 +1,15 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import 
+{
+app,
+BrowserWindow, 
+ipcMain, 
+dialog,
+Tray
+} 
+from "electron";
 import './rpc'
+import main from "../api/main";
+main();
 import { PARAMS, VALUE, MicaBrowserWindow, IS_WINDOWS_11, WIN10 } from 'mica-electron';
 import * as path from "path";
 import express, { Request, Response, NextFunction } from "express";
@@ -10,8 +20,9 @@ import { Build } from './index.json'
 let mainWindow: BrowserWindow | null;
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1740,
-    height: 900,
+    icon: path.join(__dirname, "../assets/aurora.png"),
+    width: 1300,
+    height: 550,
     frame: true,
     x: undefined,
     y: undefined,
@@ -75,6 +86,16 @@ console.log("Electron App Created, ID:", Build )
   createWindow();
   app.on("activate", function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  
+});
+});
+
+//open file
+ipcMain.on('open-file-dialog', (event) => {
+  dialog.showOpenDialog({ properties: ['openDirectory'] }).then((result) => {
+    if (!result.canceled && result.filePaths.length > 0) {
+      event.reply('selected-file', result.filePaths[0]);
+    }
   });
 });
 

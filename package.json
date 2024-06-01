@@ -5,7 +5,6 @@
   "author": "loonalol <loona@loona.lol>",
   "license": "MIT",
   "private": "true",
-  
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
@@ -17,6 +16,7 @@
     "discord-auto-rpc": "^1.0.17",
     "ejs": "^3.1.10",
     "express-ejs-layouts": "^2.5.1",
+    "global": "^4.4.0",
     "less": "^4.2.0",
     "mica-electron": "^1.5.10",
     "typescript": "^5.4.5"

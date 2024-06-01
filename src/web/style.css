@@ -1,9 +1,10 @@
+@import url(./flunet.css);
 html, body {
-  background-color: rgba(14, 13, 13, 0.281);
+background-color: var(--fds-acrylic-background-default);
   padding: 0;
   margin: 0;
-  color: white;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: var(--fds-text-primary);
+font-family: var(	--fds-font-family-text);
   overflow: hidden;
   width: 100%;
     font-synthesis: none;
@@ -28,7 +29,7 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 .amp-body {
     flex: 1; 
     height: 100%;
-    padding-left: 3vh;
+    padding-left: 5vh;
     padding-top: 3vh;
     animation: fadeInAnimation ease 0.5s;
   animation-iteration-count: 1;
@@ -45,7 +46,6 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
 .login-btn {
   background-color: rgb(235, 24, 56);
-  color: white;
   border: transparent solid 0.5px;
   padding: 15px 32px;
   text-align: center;
@@ -82,39 +82,70 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .chrome-sidebar{
-  background-color: rgba(14, 13, 13, 0.856);
+  background-color: var(--fds-layer-background-alt);
   height: 100%;
-  width: 30vh;
+  width: 300px;
   margin: 0;
 box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-
 }
 
 .sidebar-content{
-  display: flex;
-  flex-direction: column;
   width: 100%;
   height: 100%;
-  margin-top: 5vh;
+  margin-top: 50px;
   gap: 0vh;
-
 }
 
-.sidebar-btn{
+.amp-import{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.import-btn{
+  background-color: var(--fds-accent-default);
+  color: var(--fds-text-on-accent-primary);
+  font-weight: bold; 
+  cursor: pointer;
+  height: 50px; 
+  border: none;
+  padding-left: 80px;
+  padding-right: 80px;
+  text-align: left;
+  border-radius: var(--fds-overlay-corner-radius);
+  padding: 0 30px; 
+  font-size: 20px; 
+}
+
+
+.sidebar-btn {
   background-color: inherit;
   width: 100%;
-color: white;
-font-style: bold;
+  color: var(--fds-text-primary);
+  font-weight: bold; 
   cursor: pointer;
-  height: 5vh;
+  height: 50px; 
   border: none;
+  padding-left: 80px;
+  padding-right: 80px;
   text-align: left;
-  padding: 0vh 3vh 0vh;
-  font-size: 2vh;
+  border-radius: 8px;
+  padding: 0 30px; 
+  font-size: 20px; 
 }
-.sidebar-btn:hover{
-  background-color: rgba(14, 13, 13, 0.397);
+
+.sidebar-btn:hover {
+color: var(--fds-accent-text-primary);
+transition: 0.5s;
 }
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
 
 .username-input{
   background-color: transparent;
@@ -122,10 +153,6 @@ font-style: bold;
   color: white;
 }
 
-.icon{
-width: 1.6vh;
-height: 1.6vh;
-}
 
 .wrapper{
     display: flex;
