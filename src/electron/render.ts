@@ -8,8 +8,6 @@ Tray
 } 
 from "electron";
 import './rpc'
-import main from "../api/main";
-main();
 import { PARAMS, VALUE, MicaBrowserWindow, IS_WINDOWS_11, WIN10 } from 'mica-electron';
 import * as path from "path";
 import express, { Request, Response, NextFunction } from "express";
